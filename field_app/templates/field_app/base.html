@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>foodbook</title>
+  <!-- Подключение стилей Bootstrap -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{% static 'field_app/css/main.css' %}">
+
+</head>
+<body>
+
+
+
+    
+    <!-- HEADER -->
+    <div id="header">
+      <section class="header">
+        <a href="/" class="header__logo logo-marketplace">
+          <img class="logo-marketplace__logo" src="{% static 'field_app/images/2.png' %}" alt="FindSport">
+        </a>
+  
+        <nav class="header__nav header-nav">
+          <a class="header-nav__link " href="/playground/index">Площадки</a>
+               </nav>
+  
+        <div class="header__actions">
+                          <div class="header__action" id="-js-header-region-location">
+                      <div class="widget-dropdown-region-container -js-widget-header-region-dropdown">
+  
+  
+  </div>                                    
+          
+    <div class="header__action">
+      
+      {% if user.is_authenticated %}
+        <li class="nav-item">
+          <h2 class="welcome-message">Добро пожаловать, <a href="{% url 'profile' %}">{{ user.username }}</a>!</h2>
+        
+        <a class="nav-link" href="{% url 'logout' %}" style="color: white;">Выйти</a>
+      </li>
+      {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'login' %}" style="color: white;">Войти</a>
+        </li>
+      {% endif %}
+  <div class="modal-auth modal modal_size_xs modal_placement_center-center" id="authorization-modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal__dialog">
+      <div class="modal__content">
+        <div class="preloader preloader_position_block preloader_size_m preloader_theme_light"></div>
+        <div class="modal__header">
+          <button type="button" class="modal__close-button" data-dismiss="modal"></button>
+          <div class="modal__title">Авторизация</div>
+        </div>
+        <div id="auth-region" class=""></div>		</div>
+    </div>
+  </div>					</div>
+          
+        </div>
+      </section>
+    </div>
+    <!-- END HEADER -->
+
+    {% block content %} 
+
+    {% endblock %}
+  <!-- </div> -->
+  </body>
+  </html>

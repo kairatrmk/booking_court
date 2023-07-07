@@ -1,0 +1,92 @@
+{% extends "field_app/base.html" %}
+{% block content %}
+
+<h1>Добавление поля</h1>
+
+<form method="post" action="{% url 'add_field' %}" enctype="multipart/form-data">
+  {% csrf_token %}
+  
+  <label for="name">Название поля:</label>
+  <input type="text" name="name" id="name" value="{{ field.name }}">
+  
+  <label for="has_shower">Наличие душа:</label>
+  <input type="checkbox" name="has_shower" id="has_shower" {% if field.has_shower %}checked{% endif %}>
+  
+  <label for="has_parking">Наличие парковки:</label>
+  <input type="checkbox" name="has_parking" id="has_parking" {% if field.has_parking %}checked{% endif %}>
+  
+  <label for="has_locker_room">Наличие раздевалки:</label>
+  <input type="checkbox" name="has_locker_room" id="has_locker_room" {% if field.has_locker_room %}checked{% endif %}>
+  
+  <label for="has_roof">Крытое / Не крытое поле</label>
+  <input type="checkbox" name="has_roof" id="has_roof" {% if field.has_roof %}checked{% endif %}>
+
+  <label for="surface_type">Тип покрытия:</label>
+  <select name="surface_type" id="surface_type">
+    <option value="газон" {% if field.surface_type == 'газон' %}selected{% endif %}>Газон</option>
+    <option value="паркет" {% if field.surface_type == 'паркет' %}selected{% endif %}>Паркет</option>
+  </select>
+  
+  <label for="size_of_field">Размер поля:</label>
+  <input type="text" name="size_of_field" id="size_of_field" value="{{ field.size_of_field }}">
+  
+  <label for="photo">Фото:</label>
+  <input type="file" name="photo" id="photo">
+  
+  <input type="submit" value="Добавить поле">
+</form>
+
+{% endblock %}
+
+
+
+
+<!-- <h1>Добавление поля</h1>
+
+<form class="needs-validation" method="post" action="{% url 'add_field' %}">
+  {% csrf_token %}
+  
+  <div class="mb-3">
+    <label for="name" class="form-label">Название поля:</label>
+    <input type="text" class="form-control" name="name" id="name" value="{{ field.name }}" required>
+    <div class="invalid-feedback">
+      Пожалуйста, введите название поля.
+    </div>
+  </div>
+  
+  <div class="mb-3 form-check">
+    <input type="checkbox" class="form-check-input" name="has_shower" id="has_shower" {% if field.has_shower %}checked{% endif %}>
+    <label class="form-check-label" for="has_shower">Наличие душа</label>
+  </div>
+  
+  <div class="mb-3 form-check">
+    <input type="checkbox" class="form-check-input" name="has_parking" id="has_parking" {% if field.has_parking %}checked{% endif %}>
+    <label class="form-check-label" for="has_parking">Наличие парковки</label>
+  </div>
+  
+  <div class="mb-3 form-check">
+    <input type="checkbox" class="form-check-input" name="has_locker_room" id="has_locker_room" {% if field.has_locker_room %}checked{% endif %}>
+    <label class="form-check-label" for="has_locker_room">Наличие раздевалки</label>
+  </div>
+  
+  <div class="mb-3">
+    <label for="surface_type" class="form-label">Тип покрытия:</label>
+    <select class="form-select" name="surface_type" id="surface_type" required>
+      <option value="газон" {% if field.surface_type == 'газон' %}selected{% endif %}>Газон</option>
+      <option value="паркет" {% if field.surface_type == 'паркет' %}selected{% endif %}>Паркет</option>
+    </select>
+    <div class="invalid-feedback">
+      Пожалуйста, выберите тип покрытия.
+    </div>
+  </div>
+  
+  <div class="mb-3">
+    <label for="size_of_field" class="form-label">Размер поля:</label>
+    <input type="text" class="form-control" name="size_of_field" id="size_of_field" value="{{ field.size_of_field }}" required>
+    <div class="invalid-feedback">
+      Пожалуйста, введите размер поля.
+    </div>
+  </div>
+  
+  <button type="submit" class="btn btn-primary">Добавить поле</button>
+</form> -->

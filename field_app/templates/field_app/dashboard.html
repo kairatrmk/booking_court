@@ -1,0 +1,17 @@
+{% extends 'field_app/base.html'%}
+{% block content%}
+{% load static %}
+<link rel="stylesheet" href="{% static 'field_app/css/main.css' %}">
+
+
+<h1>Панель управления</h1>
+<!-- Дополнительный контент для панели управления -->
+<a href="{% url 'logout' %}">Выйти</a>
+
+
+
+<!-- <div class="button" id="button-2">
+    <div id="slide"></div>
+    <a href="{% url 'profile' %}">Let's Go!</a>
+  </div> -->
+  {% endblock %}

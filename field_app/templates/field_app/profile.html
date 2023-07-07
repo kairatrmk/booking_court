@@ -1,0 +1,142 @@
+{% extends "field_app/base.html"%}
+{% block content %}
+{% load static %}
+
+
+<link rel="stylesheet" href="{% static 'field_app/css/main.css' %}">
+
+
+
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+<h1>Личный кабинет</h1>
+
+
+
+<table class="table" style="width: 50%; margin: auto;">
+  <tbody class="bodytable">
+    <tr>
+      <td>Имя владельца:</td>
+      <td>{{ owner.name }}</td>
+    </tr>
+    <tr>
+      <td>Адрес:</td>
+      <td>{{ owner.address }}</td>
+    </tr>
+    <tr>
+      <td>Контактные данные:</td>
+      <td>{{ owner.contact }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="btns" style="display: flex; justify-content: center; align-items: center; margin-top: 20px;">
+  <div class="button" id="button-2" style="border: 2px solid black; text-align: center; margin-right: 10px;">
+      <div id="slide"></div>
+      <a href="{% url 'create_booking' %}" style="display: inline-block; margin: 0 auto;">Забронировать!</a>
+  </div>
+
+  <!-- Форма добавления/изменения данных о владельце -->
+  <div class="button" id="button-2" style="border: 2px solid black; text-align: center; margin-right: 10px;">
+      <div id="slide"></div>
+      <a href="{% url 'add_field' %}" style="display: inline-block; margin: 0 auto;">Добавить поле</a>
+  </div>
+
+  <!-- Форма добавления поля -->
+  <div class="button" id="button-2" style="border: 2px solid black; text-align: center;">
+      <div id="slide"></div>
+      <a href="{% url 'owner_detail' %}" style="display: inline-block; margin: 0 auto;">Изменить данные о {{ owner.name }}</a>
+  </div>
+</div>
+
+
+
+
+
+
+
+<!-- Список уже добавленных полей пользователя -->
+{% if fields %}
+  <h3 class="center-text">Ваши поля:</h3>
+  <ul>
+    <table class="table table-poles">
+      <!-- <span class="table border-black"> -->
+      <thead class="table-dark">
+        <tr>
+          <th scope="col">Имя поля</th>
+          <th scope="col">Покрытие</th>
+          <th scope="col">Размер</th>
+          <th scope="col">Душ</th>
+          <th scope="col">Парковка</th>
+          <th scope="col">Раздевалка</th>
+          <th scope="col">Крытое/Не крытое поле</th>
+
+
+        </tr>
+      </thead>
+    <tbody>
+    {% for field in fields %}
+      <tr>
+      <td>{{ field.name }}</td>
+      <td>{{field.surface_type}}</td>
+      <td>{{field.size_of_field}}</td>
+      <td>{{field.has_shower}}</td>
+      <td>{{field.has_parking}}</td>
+      <td>{{field.has_locker_room}}</td>
+      <td>{{field.has_roof}}</td>
+
+
+      </tr>
+    {% endfor %}
+    </tbody> 
+  </ul>
+{% else %}
+  <p>У вас пока нет добавленных полей.</p>
+{% endif %}
+
+
+<!-- Список уже созданных Booking объектов пользователя -->
+{% if bookings %}
+
+<h3 class="center-text">Ваши заказы:</h3>
+  <table class="table table-striped">
+    <!-- <span class="table border-black"> -->
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">Имя поля</th>
+        <th scope="col">Дата</th>
+        <th scope="col">Время начала</th>
+        <th scope="col">Время конца</th>
+        <th scope="col">Сыграно</th>
+        <th scope="col">Сумма</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for booking in bookings %}
+          <tr>
+  
+          <td>{{booking.field.name}}</td>
+          <td>{{booking.selected_date}}</td>
+          <td>{{booking.selected_time_start}}</td>
+          <td>{{booking.selected_time_end}}</td>
+          <td>{{booking.played_hours}}</td>
+          <td>{{booking.total_bill}}</td>
+          </tr>
+        {% endfor %}
+
+    </tbody>
+  <!-- </span> -->
+  </table>
+
+
+{% else %}
+  <p>У вас пока нет заказов.</p>
+{% endif %}
+
+
+{% endblock %}
+
+
+
+

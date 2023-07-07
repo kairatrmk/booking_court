@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Временные слоты</title>
+  <style>
+    .time-slot {
+      display: inline-block;
+      width: 100px;
+      height: 40px;
+      border: 1px solid #ccc;
+      margin: 5px;
+      text-align: center;
+      line-height: 40px;
+      cursor: pointer;
+    }
+    
+    .time-slot:hover {
+      background-color: #f0f0f0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Выберите временной слот:</h1>
+  
+  <div id="time-slots"></div>
+  
+  <script>
+    var timeSlots = [
+      "09:00 - 10:00",
+      "10:00 - 11:00",
+      "11:00 - 12:00",
+      "12:00 - 13:00",
+      "13:00 - 14:00",
+      "14:00 - 15:00"
+    ];
+    
+    var timeSlotsContainer = document.getElementById("time-slots");
+    
+    timeSlots.forEach(function(slot) {
+      var slotElement = document.createElement("div");
+      slotElement.className = "time-slot";
+      slotElement.textContent = slot;
+      slotElement.addEventListener("click", function() {
+        alert("Вы выбрали слот: " + slot);
+      });
+      timeSlotsContainer.appendChild(slotElement);
+    });
+  </script>
+</body>
+</html>

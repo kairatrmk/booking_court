@@ -1,0 +1,43 @@
+{% extends 'field_app/base.html' %}
+{% load booking_filters %}
+
+{% load static %}
+
+{% block content %}
+    <link rel="stylesheet" href="{% static 'field_app/css/main.css' %}">
+
+    <div class="field-details">
+        <h2>{{ field.name }}</h2>
+        {% if field.photo %}
+            <img class="vcard__image" src="{{ field.photo.url }}">
+        {% else %}
+            <p>No image available</p>
+        {% endif %}
+        <p>Адрес: {{ field.address }}</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Время</th>
+                    {% for date, time_slots_for_date in availability.items %}
+                        <th>{{ date }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for time_slot in time_slots %}
+                    <tr>
+                        <td>{{ time_slot }}</td>
+                        {% for date, time_slots_for_date in availability.items %}
+                            {% if time_slot in time_slots_for_date %}
+                                <td style="color: red;">Занято</td>
+                            {% else %}
+                                <td style="color: green;">Свободно</td>
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Booking</title>
+</head>
+<body>
+    <h1>Create Booking</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.errors }}
+        <label for="field">Field:</label>
+        <select name="field" id="field">
+            {% for field in fields %}
+                <option value="{{ field.id }}">{{ field.name }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label for="selected_date">Selected Date:</label>
+        <input type="date" name="selected_date" id="selected_date">
+        <br>
+        <label for="selected_time_start">Selected Time Start:</label>
+        <select name="selected_time_start" id="selected_time_start">
+            {% for choice in time_choices %}
+                <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label for="selected_time_end">Selected Time End:</label>
+        <select name="selected_time_end" id="selected_time_end">
+            {% for choice in time_choices %}
+                <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label for="price_hour">Price per Hour:</label>
+        <input type="number" name="price_hour" id="price_hour">
+        <br>
+        <label>Played Hours:</label>
+        <span>{{ played_hours }}</span>
+        <br>
+        <label>Total Bill:</label>
+        <span>{{ total_bill }}</span>
+        <br>
+        <input type="submit" value="Create Booking">
+    </form>
+</body>
+</html>
